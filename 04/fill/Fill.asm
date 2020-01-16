@@ -1,0 +1,40 @@
+(start)
+   @KBD
+   D=M
+   @start
+   D;JEQ
+(p1)
+    @SCREEN
+    D=A
+    @0
+    M=D
+
+(p2)
+    @0
+    D=M
+    @KBD
+    D=D-A
+    @p1
+    D;JGE
+    @0
+    A=M
+    M=-1
+    @0
+    M=M+1
+    @p2
+    0;JMP
+
+(p3)
+    @0
+    D=M
+    @KBD
+    D=D-A
+    @p1
+    D;JGE
+    @0
+    A=M
+    M=0
+    @0
+    M=M+1
+    @p3
+    0;JMP

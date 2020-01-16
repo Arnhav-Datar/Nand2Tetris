@@ -1,0 +1,172 @@
+class View {
+  field int length;
+  field Snake snake;
+  field Block target;
+  field int dir;
+
+  static boolean terminated;
+  static int speed;
+
+  constructor View init(int l) {
+    var int userSeed;
+    do Screen.clearScreen();
+    do Rand.setSeed(View.askSeed());
+    do Block.setBlockInfo(10, 1);
+    let length = l;
+    let snake = Snake.init(length);
+    let target = Block.newRandBlock(snake, length);
+    let dir = 1;
+    let speed = 5000;
+    let terminated = false;
+    do Sys.wait(speed);
+    return this;
+  }
+
+  function int askSeed() {
+    // Unable to check type due to design of Jack language
+    var int userSeed;
+    var String message0, message1, message2, message3, message4;
+    var String exp0, exp1, exp2, exp3, exp4;
+    var boolean matched;
+    var Array tmpUsedNum;
+    let message0 = "Welcome to the SNAKE GAME!";
+    let message1 = "Choose your lucky number (1~99).";
+    let message2 = "Hit enter when you've done choosen: ";
+    let message3 = "Invalid number. Choose again (1~99): ";
+    let exp0 = "RULES";
+    let exp1 = "1. Use arrow key to move the snake.";
+    let exp2 = "2. The speed increases when your snake grows.";
+    let exp3 = "3. If you run into wall or snake body, you lose.";
+    let exp4 = "4. When snake grows to 75 blocks long, you win.";
+    do Screen.clearScreen();
+    do Output.moveCursor(0, 0);
+    do Output.printString(message0);
+    do Output.println();
+    do Output.printString(message1);
+    do Output.println();
+    do Output.println();
+    do Output.printString(exp0); 
+    do Output.println();
+    do Output.printString(exp1); 
+    do Output.println();
+    do Output.printString(exp2); 
+    do Output.println();
+    do Output.printString(exp3); 
+    do Output.println();
+    do Output.printString(exp4); 
+    do Output.println();
+    do Output.println();
+    let userSeed = Keyboard.readInt(message2); 
+    while ((userSeed > 99) | (userSeed < 0)) {
+      let userSeed = Keyboard.readInt(message3);
+    }
+    do Screen.clearScreen();
+    do message0.dispose();
+    do message1.dispose();
+    do message2.dispose();
+    do message3.dispose();
+    do exp0.dispose();
+    do exp1.dispose();
+    do exp2.dispose();
+    do exp3.dispose();
+    do exp4.dispose();
+    return userSeed;
+  }
+ 
+  method boolean move() {
+    var int key, newL, hit;
+    var boolean lose, matched, restart;
+    var String loseMessage0, loseMessage1, c3, c2, c1; 
+    var String winMessage;
+    let loseMessage0 = "You lose!";
+    let loseMessage1 = "The game will restart in 3 secs...";
+    let c3 = "3.. ";
+    let c2 = "2.. ";
+    let c1 = "1.. ";
+    let winMessage = "Your snake is 75 blocks long! You win!";
+    while (~(terminated)) {
+      let terminated = true;
+      let key = Keyboard.keyPressed();
+      if ((key = 132) & ~(dir = 2)) {let dir = 1;}
+      if ((key = 130) & ~(dir = 1)) {let dir = 2;}
+      if ((key = 131) & ~(dir = 4)) {let dir = 3;}
+      if ((key = 133) & ~(dir = 3)) {let dir = 4;}
+      let lose = Block.seeIfLose(length, snake, dir);
+      if (lose) {
+        let terminated = true;
+        do Screen.clearScreen();
+        do Output.moveCursor(0, 0);
+        do Output.printString(loseMessage0);
+        do Output.println();
+        do Output.printString(loseMessage1);
+        do Output.println();
+        do Output.println();
+        do Sys.wait(10000);
+        do Output.printString(c3);
+        do Sys.wait(10000);
+        do Output.printString(c2);
+        do Sys.wait(10000);
+        do Output.printString(c1);
+        do Sys.wait(10000);
+        do loseMessage0.dispose();
+        do loseMessage1.dispose();
+        do c3.dispose();
+        do c2.dispose();
+        do c1.dispose();
+        do winMessage.dispose();
+        let restart = true;
+      } else {
+        let newL = length - 1;
+        let matched = Block.matched(snake[newL], target, dir);
+        if (matched) {
+          let snake = Snake.lengthenSnake(snake, length, target);
+          let length = length + 1;     
+          let target = Block.newRandBlock(snake, length);
+          if (length = 10) {let speed = 4000;}
+          if (length = 20) {let speed = 3000;}
+          if (length = 25) {let speed = 2500;}
+          if (length = 30) {let speed = 2000;}
+          if (length = 40) {let speed = 1000;}
+          if (length = 50) {let speed = 500;}
+        } else {
+          do Snake.moveSnake(snake, length, dir);
+        }
+        do Sys.wait(speed);
+        if (length = 75) {
+          do Screen.clearScreen();
+          do Output.moveCursor(0, 0);
+          do Output.printString(winMessage);
+          do Output.println();
+          do Output.printString(loseMessage1);
+          do Output.println();
+          do Output.println();
+          do Sys.wait(10000);
+          do Output.printString(c3);
+          do Sys.wait(10000);
+          do Output.printString(c2);
+          do Sys.wait(10000);
+          do Output.printString(c1);
+          do Sys.wait(10000);
+          do loseMessage0.dispose();
+          do loseMessage1.dispose();
+          do c3.dispose();
+          do c2.dispose();
+          do c1.dispose();
+          do winMessage.dispose();
+          let restart = true;
+        } else {
+          let terminated = false;
+        }
+      }
+    }
+    return restart;
+  }
+
+  method void dispose() {
+    do Snake.dispose(snake, length);
+    do Block.dispose(target);
+    do Memory.deAlloc(this);
+    return;
+  }
+
+}

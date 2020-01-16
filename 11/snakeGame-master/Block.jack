@@ -1,0 +1,190 @@
+class Block {
+  field int xCoord, yCoord;
+  static int blockW, margin;
+
+  constructor Block new(int x, int y) {
+    let xCoord = x;
+    let yCoord = y;
+    return this;
+  }
+
+  function Block newRandBlock(Snake snake, int l) {
+    var int randX, randY, i, blockX, blockY;
+    var Block randBlock, tmpBlock;
+    var boolean matched;
+    let randX = Rand.randRange(50);
+    let randY = Rand.randRange(24);
+    let i = 0;
+    let matched = false;
+    while (i < l) {
+      let tmpBlock = snake[i];
+      let blockX = tmpBlock.getCoord(true); 
+      let blockY = tmpBlock.getCoord(false);
+      if ((blockX = randX) & (blockY = randY)) {
+        let matched = true;
+      }
+      let i = i + 1; 
+    }
+    while (matched) {
+      let matched = false;
+      let randX = Rand.randRange(50);
+      let randY = Rand.randRange(24);
+      let i = 0;
+      while (i < l) {
+        let tmpBlock = snake[i];
+        let blockX = tmpBlock.getCoord(true); 
+        let blockY = tmpBlock.getCoord(false);
+        if ((blockX = randX) & (blockY = randY)) {
+          let matched = true;
+        }
+        let i = i + 1; 
+      }
+    }
+    let randBlock = Block.new(randX, randY);
+    do Block.drawRandBlock(randBlock);
+    // do Block.printBlockCoord(randBlock);
+    return randBlock;
+  }
+
+  method int getCoord(boolean x) {
+    var int retCoord;
+    if (x) {
+      let retCoord = xCoord;
+    } else {
+      let retCoord = yCoord;
+    }
+    return retCoord;
+  }
+
+  function boolean matched(Block head, Block target, int dir) {
+    var int headX, headY, targetX, targetY;
+    var boolean matched;
+    let matched = false;
+    let headX = head.getCoord(true);
+    let headY = head.getCoord(false);
+    if (dir = 1){let headX = headX + 1;}
+    if (dir = 2){let headX = headX - 1;}
+    if (dir = 3){let headY = headY - 1;}
+    if (dir = 4){let headY = headY + 1;}
+    let targetX = target.getCoord(true);
+    let targetY = target.getCoord(false);
+    if ((headX = targetX) & (headY = targetY)) {
+      let matched = true; 
+    }
+    return matched;
+  } 
+
+  function Block moveHeadBlock(Block headBlock, int dir) {
+    var int newXCoord, newYCoord;
+    var BLock newHeadBlock;
+    let newXCoord = headBlock.getCoord(true);
+    let newYCoord = headBlock.getCoord(false);
+    if (dir = 1) {let newXCoord = newXCoord + 1;}
+    if (dir = 2) {let newXCoord = newXCoord - 1;}
+    if (dir = 3) {let newYCoord = newYCoord - 1;}
+    if (dir = 4) {let newYCoord = newYCoord + 1;}
+    let newHeadBlock = Block.new(newXCoord, newYCoord);
+    do Block.drawFullBlock(newHeadBlock, true);
+    return newHeadBlock;
+  }
+ 
+  function boolean seeIfLose(int l, Snake snake, int dir) {
+    var boolean bumpWall, bumpBody, lose;
+    var int headX, headY, i, newL, tmpX, tmpY;
+    var Block head, tmpBlock;
+    let bumpWall = false;
+    let bumpBody = false;
+    let lose = false;
+    let newL = l - 1;
+    let head = snake[newL];
+    let headX = head.getCoord(true);
+    let headY = head.getCoord(false);
+    if (dir = 1){let headX = headX + 1;}
+    if (dir = 2){let headX = headX - 1;}
+    if (dir = 3){let headY = headY - 1;}
+    if (dir = 4){let headY = headY + 1;}
+    if ((headX < 0) | (headX > 50) | (headY > 24) | (headY < 0)) {
+      let bumpWall = true; 
+    }
+    let i = 1;
+    while (i < newL) {
+      let tmpBlock = snake[i];
+      let tmpX = tmpBlock.getCoord(true);
+      let tmpY = tmpBlock.getCoord(false);
+      if ((headX = tmpX) & (headY = tmpY)) {
+        let bumpBody = true;
+      }
+      let i = i + 1;
+    }
+    if ((bumpWall) | (bumpBody)) {
+      let lose = true;
+    }
+    return lose;
+  }
+ 
+  function void dispose(Block block) {
+    do Memory.deAlloc(block);
+    return;
+  }
+
+  function void setBlockInfo(int bw, int m) {
+    let blockW = bw;
+    let margin = m;
+    return;
+  }
+
+  function void drawFullBlock(Block block, boolean color) {
+    var int x1, y1, x2, y2;
+    var int xIndx, yIndx;
+    let xIndx = block.getCoord(true);
+    let yIndx = block.getCoord(false);
+    let x1 = xIndx * blockW + margin;
+    let y1 = yIndx * blockW + margin;
+    let x2 = xIndx * blockW + blockW - margin;
+    let y2 = yIndx * blockW + blockW - margin;
+    if (color) {
+      do Screen.setColor(true);
+    } else {
+      do Screen.setColor(false);
+    }
+    do Screen.drawRectangle(x1, y1, x2, y2);
+    return;
+  }
+  
+  function void drawRandBlock(Block randBlock) {
+    var int innerX1, innerY1, innerX2, innerY2;
+    var int xIndx, yIndx;
+    do Block.drawFullBlock(randBlock, true);
+    let xIndx = randBlock.getCoord(true);
+    let yIndx = randBlock.getCoord(false);
+    let innerX1 = xIndx * blockW + margin + 1;
+    let innerY1 = yIndx * blockW + margin + 1;
+    let innerX2 = xIndx * blockW + blockW - margin - 1; 
+    let innerY2 = yIndx * blockW + blockW - margin - 1; 
+    do Screen.setColor(false);
+    do Screen.drawRectangle(innerX1, innerY1, innerX2, innerY2);
+    return;
+  }
+
+  // debug
+  function void printBlockCoord(Block block) {
+    var String uParam, comma, lParam;
+    var int xIndx, yIndx;
+    let xIndx = block.getCoord(true);
+    let yIndx = block.getCoord(false);
+    let uParam = "(";
+    let comma = ",";
+    let lParam = ")";
+    do Output.printString(uParam);
+    do Output.printInt(xIndx);
+    do Output.printString(comma);
+    do Output.printInt(yIndx);
+    do Output.printString(lParam);
+    do Output.println();
+    do uParam.dispose();
+    do comma.dispose();
+    do lParam.dispose();
+    return;
+  }
+}
+

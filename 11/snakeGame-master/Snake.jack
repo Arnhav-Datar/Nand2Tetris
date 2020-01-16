@@ -1,0 +1,74 @@
+class Snake {
+  function Array init(int l) {
+    var Array snake;
+    var int i;
+    let snake = Array.new(l);
+    let i = 0;
+    while (i < l) {
+      let snake[i] = Block.new(i, 0);
+      do Block.drawFullBlock(snake[i], true); 
+      // do Block.printBlockCoord(snake[i]);
+      let i = i + 1;
+    }
+    return snake;
+  }
+ 
+  function Block getBlock(Array snake, int indx) {
+    return snake[indx];
+  }
+ 
+  function void moveSnake(Array snake, int l, int dir) {
+    var int i, tmpl;
+    let i = 0;
+    let tmpl = l - 1;
+    do Block.drawFullBlock(snake[i], false);
+    do Block.dispose(snake[i]);
+    while (i < tmpl) {
+      let snake[i] = snake[i + 1];
+      // do Block.printBlockCoord(snake[i]);
+      let i = i + 1;
+    }
+    let snake[l - 1] = Block.moveHeadBlock(snake[l - 1], dir);
+    // do Block.printBlockCoord(snake[l - 1]);
+    return;
+  }
+
+  function Array lengthenSnake(Array snake, int l, Block target) {
+    var int newLength, i;
+    var Array newSnake;
+    do Block.drawFullBlock(target, true);
+    let newLength = l + 1;
+    let newSnake = Array.new(newLength);
+    let i = 0;
+    while (i < l) {
+      let newSnake[i] = snake[i];
+      // do Block.printBlockCoord(newSnake[i]);
+      let i = i + 1;
+    }
+    do snake.dispose();
+    let newSnake[i] = target;
+    return newSnake;
+  } 
+
+  function void dispose(Array snake, int l) {
+    var int i;
+    let i = 0;
+    while (i < l) {
+      do Block.dispose(Snake.getBlock(snake, i));
+      let i = i + 1;
+    }
+    do snake.dispose();
+    return;
+  }
+  
+  // debug
+  function void printSnakeCoords(Array snake, int l) {
+    var int i;
+    let i = 0;
+    while (i < l) {
+      do Block.printBlockCoord(snake[i]);
+      let i = i + 1;
+    }
+    return;
+  }   
+}

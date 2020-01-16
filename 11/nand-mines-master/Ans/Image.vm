@@ -1,0 +1,1108 @@
+function Image.newBitmap 0
+push constant 16
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 0
+push argument 1
+call Math.multiply 2
+pop this 2
+push this 2
+call Array.new 1
+pop this 3
+push constant 0
+pop this 10
+push pointer 0
+return
+function Image.newDelta 0
+push constant 16
+call Memory.alloc 1
+pop pointer 0
+push argument 1
+pop this 8
+push argument 2
+pop this 9
+push argument 3
+pop this 0
+push argument 4
+pop this 1
+push argument 0
+pop this 2
+push this 2
+call Array.new 1
+pop this 3
+push constant 0
+pop this 10
+push pointer 0
+return
+function Image.newRender 0
+push constant 16
+call Memory.alloc 1
+pop pointer 0
+push constant 0
+not
+pop this 10
+push pointer 0
+push argument 0
+push argument 1
+call Image.resetRender 3
+pop temp 0
+push argument 2
+pop this 0
+push argument 3
+pop this 1
+push constant 16
+pop this 2
+push this 2
+call Array.new 1
+pop this 3
+push pointer 0
+return
+function Image.newCompressed 0
+push constant 16
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push argument 1
+pop this 1
+push argument 0
+push argument 1
+call Math.multiply 2
+pop this 2
+push this 2
+call Array.new 1
+pop this 3
+push argument 2
+pop this 5
+push argument 2
+call Array.new 1
+pop this 6
+push constant 0
+pop this 10
+push pointer 0
+return
+function Image.dispose 0
+push argument 0
+pop pointer 0
+push pointer 0
+call Image.disposeCompressed 1
+pop temp 0
+push this 3
+call Array.dispose 1
+pop temp 0
+push constant 0
+return
+function Image.disposeCompressed 0
+push argument 0
+pop pointer 0
+push this 5
+push constant 0
+gt
+not
+if-goto Image2
+push this 6
+call Array.dispose 1
+pop temp 0
+goto Image3
+label Image2
+label Image3
+push constant 0
+pop this 5
+push constant 0
+return
+function Image.getBitmap 0
+push argument 0
+pop pointer 0
+push this 3
+return
+function Image.getLength 0
+push argument 0
+pop pointer 0
+push this 2
+return
+function Image.getWidth 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Image.getHeight 0
+push argument 0
+pop pointer 0
+push this 1
+return
+function Image.getData 0
+push argument 0
+pop pointer 0
+push this 6
+return
+function Image.getDataLength 0
+push argument 0
+pop pointer 0
+push this 5
+return
+function Image.isRender 0
+push argument 0
+pop pointer 0
+push this 10
+return
+function Image.resetRender 0
+push argument 0
+pop pointer 0
+push argument 1
+pop this 11
+push argument 2
+pop this 12
+push constant 0
+pop this 13
+push constant 0
+pop this 14
+push constant 16384
+push this 11
+add
+push this 12
+push constant 32
+call Math.multiply 2
+add
+pop this 15
+push constant 0
+return
+function Image.push 1
+push argument 0
+pop pointer 0
+push this 2
+push this 7
+sub
+pop local 0
+push local 0
+push constant 0
+eq
+not
+if-goto Image4
+push constant 0
+return
+goto Image5
+label Image4
+label Image5
+push local 0
+push constant 15
+gt
+not
+if-goto Image6
+push this 7
+push this 3
+add
+push argument 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 1
+add
+push this 3
+add
+push argument 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 2
+add
+push this 3
+add
+push argument 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 3
+add
+push this 3
+add
+push argument 4
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 4
+add
+push this 3
+add
+push argument 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 5
+add
+push this 3
+add
+push argument 6
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 6
+add
+push this 3
+add
+push argument 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 7
+add
+push this 3
+add
+push argument 8
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 8
+add
+push this 3
+add
+push argument 9
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 9
+add
+push this 3
+add
+push argument 10
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 10
+add
+push this 3
+add
+push argument 11
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 11
+add
+push this 3
+add
+push argument 12
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 12
+add
+push this 3
+add
+push argument 13
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 13
+add
+push this 3
+add
+push argument 14
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 14
+add
+push this 3
+add
+push argument 15
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 15
+add
+push this 3
+add
+push argument 16
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push this 7
+push constant 16
+add
+pop this 7
+goto Image7
+label Image6
+push this 7
+push this 3
+add
+push argument 1
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+gt
+not
+if-goto Image8
+push this 7
+push constant 1
+add
+push this 3
+add
+push argument 2
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image9
+label Image8
+label Image9
+push local 0
+push constant 2
+gt
+not
+if-goto Image10
+push this 7
+push constant 2
+add
+push this 3
+add
+push argument 3
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image11
+label Image10
+label Image11
+push local 0
+push constant 3
+gt
+not
+if-goto Image12
+push this 7
+push constant 3
+add
+push this 3
+add
+push argument 4
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image13
+label Image12
+label Image13
+push local 0
+push constant 4
+gt
+not
+if-goto Image14
+push this 7
+push constant 4
+add
+push this 3
+add
+push argument 5
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image15
+label Image14
+label Image15
+push local 0
+push constant 5
+gt
+not
+if-goto Image16
+push this 7
+push constant 5
+add
+push this 3
+add
+push argument 6
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image17
+label Image16
+label Image17
+push local 0
+push constant 6
+gt
+not
+if-goto Image18
+push this 7
+push constant 6
+add
+push this 3
+add
+push argument 7
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image19
+label Image18
+label Image19
+push local 0
+push constant 7
+gt
+not
+if-goto Image20
+push this 7
+push constant 7
+add
+push this 3
+add
+push argument 8
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image21
+label Image20
+label Image21
+push local 0
+push constant 8
+gt
+not
+if-goto Image22
+push this 7
+push constant 8
+add
+push this 3
+add
+push argument 9
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image23
+label Image22
+label Image23
+push local 0
+push constant 9
+gt
+not
+if-goto Image24
+push this 7
+push constant 9
+add
+push this 3
+add
+push argument 10
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image25
+label Image24
+label Image25
+push local 0
+push constant 10
+gt
+not
+if-goto Image26
+push this 7
+push constant 10
+add
+push this 3
+add
+push argument 11
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image27
+label Image26
+label Image27
+push local 0
+push constant 11
+gt
+not
+if-goto Image28
+push this 7
+push constant 11
+add
+push this 3
+add
+push argument 12
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image29
+label Image28
+label Image29
+push local 0
+push constant 12
+gt
+not
+if-goto Image30
+push this 7
+push constant 12
+add
+push this 3
+add
+push argument 13
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image31
+label Image30
+label Image31
+push local 0
+push constant 13
+gt
+not
+if-goto Image32
+push this 7
+push constant 13
+add
+push this 3
+add
+push argument 14
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image33
+label Image32
+label Image33
+push local 0
+push constant 14
+gt
+not
+if-goto Image34
+push this 7
+push constant 14
+add
+push this 3
+add
+push argument 15
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+goto Image35
+label Image34
+label Image35
+push this 2
+pop this 7
+label Image7
+push this 10
+not
+if-goto Image36
+push pointer 0
+call Image.pushRender 1
+pop temp 0
+push constant 0
+pop this 7
+goto Image37
+label Image36
+label Image37
+push constant 0
+return
+function Image.draw 4
+push argument 0
+pop pointer 0
+push constant 16384
+push argument 1
+add
+push argument 2
+push constant 32
+call Math.multiply 2
+add
+pop local 2
+label Image38
+push local 1
+push this 1
+lt
+not
+if-goto Image39
+push constant 0
+pop local 0
+label Image40
+push local 0
+push this 0
+lt
+not
+if-goto Image41
+push local 0
+push local 2
+add
+push local 3
+push local 0
+add
+push this 3
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto Image40
+label Image41
+push local 2
+push constant 32
+add
+pop local 2
+push local 3
+push this 0
+add
+pop local 3
+push local 1
+push constant 1
+add
+pop local 1
+goto Image38
+label Image39
+push constant 0
+return
+function Image.drawVScale 8
+push argument 0
+pop pointer 0
+push argument 3
+push constant 0
+eq
+not
+if-goto Image42
+push constant 0
+return
+goto Image43
+label Image42
+label Image43
+push constant 16384
+push argument 1
+add
+push argument 2
+push constant 32
+call Math.multiply 2
+add
+pop local 2
+push this 1
+push argument 3
+call Math.divide 2
+push this 0
+call Math.multiply 2
+pop local 5
+push this 1
+push argument 3
+call MathsToo.mod 2
+pop local 6
+push this 0
+pop local 7
+push argument 3
+push constant 0
+lt
+not
+if-goto Image44
+push argument 3
+neg
+pop argument 3
+push this 1
+push constant 1
+sub
+push this 0
+call Math.multiply 2
+pop local 3
+push local 7
+neg
+pop local 7
+goto Image45
+label Image44
+label Image45
+push constant 0
+pop local 4
+label Image46
+push local 1
+push argument 3
+lt
+not
+if-goto Image47
+push constant 0
+pop local 0
+label Image48
+push local 0
+push this 0
+lt
+not
+if-goto Image49
+push local 0
+push local 2
+add
+push local 3
+push local 0
+add
+push this 3
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+goto Image48
+label Image49
+push local 3
+push local 5
+add
+pop local 3
+push local 4
+push local 6
+add
+pop local 4
+push local 4
+push argument 3
+gt
+not
+if-goto Image50
+push local 4
+push argument 3
+sub
+pop local 4
+push local 3
+push local 7
+add
+pop local 3
+goto Image51
+label Image50
+label Image51
+push local 2
+push constant 32
+add
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+goto Image46
+label Image47
+push constant 0
+return
+function Image.drawColVScale 7
+push argument 0
+pop pointer 0
+push argument 4
+push constant 0
+eq
+not
+if-goto Image52
+push constant 0
+return
+goto Image53
+label Image52
+label Image53
+push constant 16384
+push argument 1
+add
+push argument 2
+push constant 32
+call Math.multiply 2
+add
+pop local 1
+push this 1
+push argument 4
+call Math.divide 2
+push this 0
+call Math.multiply 2
+pop local 4
+push this 1
+push argument 4
+call MathsToo.mod 2
+pop local 5
+push this 0
+pop local 6
+push argument 4
+push constant 0
+lt
+not
+if-goto Image54
+push argument 4
+neg
+pop argument 4
+push this 1
+push constant 1
+sub
+push this 0
+call Math.multiply 2
+pop local 2
+push local 6
+neg
+pop local 6
+goto Image55
+label Image54
+label Image55
+push local 2
+push argument 3
+add
+pop local 2
+push constant 0
+pop local 3
+label Image56
+push local 0
+push argument 4
+lt
+not
+if-goto Image57
+push constant 0
+push local 1
+add
+push local 2
+push this 3
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 2
+push local 4
+add
+pop local 2
+push local 3
+push local 5
+add
+pop local 3
+push local 3
+push argument 4
+gt
+not
+if-goto Image58
+push local 3
+push argument 4
+sub
+pop local 3
+push local 2
+push local 6
+add
+pop local 2
+goto Image59
+label Image58
+label Image59
+push local 1
+push constant 32
+add
+pop local 1
+push local 0
+push constant 1
+add
+pop local 0
+goto Image56
+label Image57
+push constant 0
+return
+function Image.drawDelta 7
+push argument 0
+pop pointer 0
+push argument 1
+push this 8
+add
+pop argument 1
+push argument 2
+push this 9
+add
+pop argument 2
+push constant 16384
+push argument 1
+add
+push argument 2
+push constant 32
+call Math.multiply 2
+add
+pop local 2
+push constant 0
+push this 3
+add
+pop pointer 1
+push that 0
+pop local 4
+push constant 1
+pop local 5
+push constant 32767
+neg
+push constant 1
+sub
+pop local 6
+push constant 1
+pop local 3
+label Image60
+push local 1
+push this 1
+lt
+not
+if-goto Image61
+push constant 0
+pop local 0
+label Image62
+push local 0
+push this 0
+lt
+not
+if-goto Image63
+push local 4
+push local 5
+and
+not
+if-goto Image64
+push local 0
+push local 2
+add
+push local 3
+push this 3
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 3
+push constant 1
+add
+pop local 3
+goto Image65
+label Image64
+label Image65
+push local 5
+push local 6
+eq
+not
+if-goto Image66
+push local 3
+push this 3
+add
+pop pointer 1
+push that 0
+pop local 4
+push constant 1
+pop local 5
+push local 3
+push constant 1
+add
+pop local 3
+goto Image67
+label Image66
+push local 5
+push local 5
+add
+pop local 5
+label Image67
+push local 0
+push constant 1
+add
+pop local 0
+goto Image62
+label Image63
+push local 2
+push constant 32
+add
+pop local 2
+push local 1
+push constant 1
+add
+pop local 1
+goto Image60
+label Image61
+push constant 0
+return
+function Image.pushRender 1
+push argument 0
+pop pointer 0
+label Image68
+push this 14
+push this 1
+lt
+not
+if-goto Image69
+label Image70
+push this 13
+push this 0
+lt
+not
+if-goto Image71
+push this 13
+push this 15
+add
+push local 0
+push this 3
+add
+pop pointer 1
+push that 0
+pop temp 0
+pop pointer 1
+push temp 0
+pop that 0
+push local 0
+push constant 1
+add
+pop local 0
+push this 13
+push constant 1
+add
+pop this 13
+push local 0
+push constant 15
+gt
+not
+if-goto Image72
+push constant 0
+return
+goto Image73
+label Image72
+label Image73
+goto Image70
+label Image71
+push this 15
+push constant 32
+add
+pop this 15
+push constant 0
+pop this 13
+push this 14
+push constant 1
+add
+pop this 14
+goto Image68
+label Image69
+push constant 0
+return
